@@ -1,10 +1,8 @@
-<h1 class="mt-2">Enjoy Trongate!</h1>
-<h2>The Native PHP Framework</h2>
-<p class="mt-2">You have successfully installed Trongate. You're now ready to start building fast, efficient web applications.</p>
-
-<div class="mt-3">
-    <?php
-    echo anchor('https://trongate.io', 'Visit Trongate.io', ['class' => 'button', 'target' => '_blank']);
-    echo anchor('https://trongate.io/docs', 'View Documentation', ['class' => 'button alt', 'target' => '_blank']);
-    ?>
+<h1 class="mt-2">Welcome to</h1>
+<h1 class="">ZagzookGames!</h1>
+<h2>You can play daily free games as a guest</h2>
+<div class="mt-2">
+    <img src="<?= BASE_URL ?>trongate-icons/warning-sign.svg" alt="User Icon" style="width: 125px; height: 125px;">
+    <h3 class="mt-2">Right now this site is underconstruction..<h3/>
 </div>
+
