@@ -1,26 +1,15 @@
 <?php
-class Members extends Trongate {
 
-    function index() {
-        // Default method for the members area
-        $data['view_module'] = 'members';
-        $data['view_file'] = 'dashboard';
-        $this->template('public', $data);
-    }
 
-    function login() {
-        // Login functionality
-    }
+class Members extends Trongate
+{
 
-    function register() {
-        // Registration functionality
-    }
-
-    function profile() {
-        // Profile page for members
-    }
-
-    function upgrade() {
-        // Upgrade membership functionality
+    public function make_sure_allowed()
+    {
+        $trongate_user_obj = $this->trongate_tokens->get_user_obj();
+        if ($trongate_user_obj === false) {
+            // No user object found, deny access
+            redirect('members-login');
+        }
     }
 }

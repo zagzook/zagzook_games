@@ -6,3 +6,9 @@
     <h3 class="mt-2">Right now this site is underconstruction..<h3/>
 </div>
 
+<div class="mt-3">
+    <p class="text-center">
+        <?= anchor('dashboard', 'Member\'s Area', ['class' => 'button alt']) ?>
+    </p>
+</div>
+
