@@ -10,8 +10,7 @@ class Join_model extends Model
             'username' => post('username', true),
             'first_name' => post('first_name', true),
             'last_name' => post('last_name', true),
-            'email_address' => post('email_address', true),
-            'password' => post('password', true)
+            'email_address' => post('email_address', true)
         ];
         return $data;
     }
@@ -63,9 +62,35 @@ class Join_model extends Model
         $data['last_name'] = $this->encryption->encrypt($data['last_name']);
         $data['date_created'] = time();
         $data['num_logins'] = 0;
-        $data['user_token'] = '';
+        $data['password'] = '';
+        $data['user_token'] = make_rand_str(32);
+        $data['confirmed'] = 0;
 
         $member_id = $this->db->insert($data, 'members');
         return $member_id;
+    }
+
+    public function attempt_activate_account($user_token)
+    {
+        $member_obj = $this->db->get_one_where('user_token', $user_token, 'members');
+
+
+        if (!$member_obj) {
+            // No matching user token found
+            return false;
+        }
+
+        $data = [
+            'confirmed' => 1,
+            'user_token' => '' // Clear the token to prevent reuse
+        ];
+
+        $update_id = (int)$member_obj->id;
+
+        $this->db->update($update_id, $data, 'members');
+
+        return $member_obj; // will be ether an object or false
+
+
     }
 }

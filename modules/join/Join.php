@@ -27,9 +27,41 @@ class Join extends Trongate
             $data = $this->model->get_data_from_post();
 
             $member_id = $this->model->create_new_member_record($data);
-            echo 'Your account has been created successfully. Your member ID is: ' . $member_id;
+
+            // Send and activate account email (later)
+
+            // Redirect the user to a 'Chek you email' page
+            redirect('join/check_your_email');
         } else {
             $this->index();
+        }
+    }
+
+    public function check_your_email()
+    {
+        $data = [
+            'view_module' => 'join',
+            'view_file' => 'check_your_email'
+        ];
+
+        $this->templates->public($data);
+    }
+
+    public function activate_account()
+    {
+        $user_token = segment(3);
+
+        $result = $this->model->attempt_activate_account($user_token);
+
+        if (!$result) {
+            $data = [
+                'view_module' => 'join',
+                'view_file' => 'invalid_activation_token'
+            ];
+
+            $this->templates->public($data);
+        } else {
+            echo 'Account activated successfully! You can now log in.';
         }
     }
 
