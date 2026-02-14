@@ -93,4 +93,11 @@ class Join_model extends Model
 
 
     }
+
+    public function get_member_obj($member_id)
+    {
+        $member_obj = $this->db->get_where($member_id, 'members');
+
+        return $member_obj; // will be either an object or false
+    }
 }

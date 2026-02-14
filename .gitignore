@@ -21,6 +21,7 @@ desktop.ini
 # Config
 # ===================
 config/
+config_live/
 
 # ===================
 # Logs
