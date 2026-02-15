@@ -39,6 +39,8 @@
     ];
     echo form_input('email_address', $email_address, $email_attributes);
 
+
+
     ?>
 
     <div class="text-center">

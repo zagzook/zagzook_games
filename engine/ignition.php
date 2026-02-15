@@ -6,6 +6,7 @@ require_once '../config/config.php';
 require_once '../config/custom_routing.php';
 require_once '../config/database.php';
 require_once '../config/site_owner.php';
+require_once '../config/members.php';
 
 // Make the $databases array globally accessible
 // This is required for multi-database functionality
@@ -21,7 +22,7 @@ spl_autoload_register(function ($class_name) {
         require_once $file;
         return true;
     }
-    
+
     // Priority 2: Check modules directory for module-based classes
     // This enables "everything is a module" philosophy (e.g., Db, future SQLite, Postgres, etc.)
     $module_name = strtolower($class_name);
@@ -30,7 +31,7 @@ spl_autoload_register(function ($class_name) {
         require_once $module_file;
         return true;
     }
-    
+
     return false;
 });
 
@@ -39,7 +40,8 @@ spl_autoload_register(function ($class_name) {
  *
  * @return array Returns an associative array with 'assumed_url' and 'segments'.
  */
-function get_segments(): array {
+function get_segments(): array
+{
     // Figure out how many segments need to be ditched
     $pseudo_url = str_replace('://', '', BASE_URL);
     $pseudo_url = rtrim($pseudo_url, '/');
@@ -67,7 +69,8 @@ function get_segments(): array {
  * @param string $url The original target URL to potentially replace.
  * @return string Returns the updated URL if a custom route match is found, otherwise returns the original URL.
  */
-function attempt_custom_routing(string $url): string {
+function attempt_custom_routing(string $url): string
+{
     static $routes = [];
     if (empty($routes)) {
         if (!defined('CUSTOM_ROUTES') || empty(CUSTOM_ROUTES)) {
